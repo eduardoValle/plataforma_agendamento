@@ -23,3 +23,25 @@ Plataforma de agendamento de serviços
 ### Criar novo módulo
 
 `py manage.py startapp login`
+
+
+
+-----
+
+# Poetry
+
+### Crie um básico pyproject.tomlcom djangocomo dependência:
+
+`poetry init --no-interaction --dependency django`
+
+
+
+### Crie venv com todas as dependências necessárias:
+
+`poetry install`
+
+
+
+### Inicie seu projeto de demonstração:
+
+`poetry run django-admin startproject plataforma-agendamento`
