@@ -15,4 +15,7 @@ urlpatterns = [
 
     path('', include('pages.urls')),
     path('login', include('authentication.urls')),
+
+
+    path('sendEmail/', include('send_email.urls')),
 ]
