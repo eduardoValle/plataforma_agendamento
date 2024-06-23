@@ -8,3 +8,6 @@ class Appointment(models.Model):
     date = models.DateTimeField()
     service = models.CharField(max_length=100)
     status = models.CharField(max_length=20, choices=[('pending', 'Pending'), ('confirmed', 'Confirmed')])
+
+    def __str__(self):
+        return f'Serviço: {self.service} | Status: {self.status}'
