@@ -17,5 +17,5 @@ urlpatterns = [
     path('login', include('authentication.urls')),
 
 
-    path('sendEmail/', include('send_email.urls')),
+    path('send-email/', include('send_email.urls')),
 ]
