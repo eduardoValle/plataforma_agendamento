@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     # 'rest_framework.authtoken',
-    # 'rest_framework_swagger',
+    'drf_yasg',
     'api.apps.ApiConfig',
     'authentication.apps.AuthenticationConfig',
     'appointments.apps.AppointmentsConfig',
@@ -112,6 +112,14 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
+}
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Basic': {
+            'type': 'basic'
+        }
+    }
 }
 
 AUTH_USER_MODEL = 'register.CustomUser'
