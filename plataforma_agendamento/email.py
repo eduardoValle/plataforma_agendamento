@@ -27,7 +27,7 @@ def send_email_appointment_confirmation(url, appointment_serializer):
             'app_name': APP_NAME,
             'email': [custom_user.email],
             'appointments_service': appointment_serializer['service'],
-            'link': "{}/confirm/{}".format(url, appointment_serializer['token'])
+            'link': '{}/confirm/{}'.format(url, appointment_serializer['token'])
         }
 
         # render email text

@@ -1,7 +1,6 @@
 import uuid
 
 from django.urls import reverse
-from django.utils import timezone
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -9,7 +8,7 @@ from rest_framework.response import Response
 
 from appointments.models import Appointment
 from appointments.serializers import AppointmentSerializer
-from appointments.tasks import send_appointment_confirmation_email_task
+from appointments.tasks import send_appointment_confirmation_email_task, execute_appointments_service
 
 
 @api_view(['GET', 'POST', 'PUT'])
@@ -73,7 +72,7 @@ def appointments_id(request, id):
         except Appointment.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        except:
+        except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
@@ -88,9 +87,9 @@ def appointments_confirm(request, token):
             # if timezone.now < appointment.date:
             #     return Response('Não foi possível confirmar o serviço, pois sua data já passou!')
 
-            # request['status'] = 'Confirmed'
             appointment.status = 'Confirmed'
             appointment.save()
+            execute_appointments_service.delay(appointment.id)
             serializer = AppointmentSerializer(appointment)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
