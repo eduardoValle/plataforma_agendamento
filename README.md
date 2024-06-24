@@ -2,6 +2,18 @@
 Plataforma de agendamento de serviços
 
 
+### Ativar ambiente virtual
+
+`.\venv\Scripts\activate`
+
+
+### Subir serviço do Celey
+
+`celery -A plataforma_agendamento worker -l info -P solo`
+
+
+
+-----
 ### Rodar as migrations
 
 `py manage.py migrate`

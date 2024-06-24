@@ -13,8 +13,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
-from decouple import config
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_results',
     'rest_framework',
     'rest_framework_simplejwt',
     # 'rest_framework.authtoken',
@@ -122,6 +121,13 @@ SWAGGER_SETTINGS = {
     }
 }
 
+
+# from kombu import Exchange, Queue
+# task_default_queue = 'default'
+# default_exchange = Exchange('media', type='direct')
+# task_queues = (Queue('media_queue', exchange=default_exchange, routing_key='video'))
+
+
 AUTH_USER_MODEL = 'register.CustomUser'
 
 # Internationalization
@@ -153,10 +159,27 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # else:
 #     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_SMTP = 'live.smtp.mailtrap.io'
 EMAIL_HOST = 'live.smtp.mailtrap.io'
 EMAIL_HOST_USER = 'api'
 EMAIL_HOST_PASSWORD = 'd0dd6ab7e64fe7bfcc3af0580d715555'
 EMAIL_PORT = '587'
+
+
+#CELERY
+
+BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+
+CELERY_BROKER_URL = BROKER_URL
+# CELERY_RESULT_BACKEND = BROKER_URL
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_ENABLED = True
+# CELERY_TASK_QUEUES = task_queues
+

@@ -13,6 +13,8 @@ drf-yasg = "^1.21.7"
 python-decouple = "^3.8"
 setuptools = "^70.1.0"
 distribute = "^0.7.3"
+celery = "^5.4.0"
+django-celery-results = "^2.5.1"
 
 
 [build-system]
