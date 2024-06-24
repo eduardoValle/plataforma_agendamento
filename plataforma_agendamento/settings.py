@@ -121,12 +121,6 @@ SWAGGER_SETTINGS = {
     }
 }
 
-# from kombu import Exchange, Queue
-# task_default_queue = 'default'
-# default_exchange = Exchange('media', type='direct')
-# task_queues = (Queue('media_queue', exchange=default_exchange, routing_key='video'))
-
-
 AUTH_USER_MODEL = 'register.CustomUser'
 
 # Internationalization

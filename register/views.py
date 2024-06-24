@@ -1,5 +1,20 @@
-from django.http import HttpResponse
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from register.serializers import CustomUserSerializer
 
 
+@api_view(['POST'])
 def register(request):
-    return HttpResponse('register')
+    # INSERINDO NOVO OBJETO
+    if request.method == 'POST':
+        request.data['is_staff'] = False
+        serializer = CustomUserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
