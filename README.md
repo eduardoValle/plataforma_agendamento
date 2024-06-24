@@ -12,6 +12,12 @@ Desafio de criar uma aplicação backend para uma empresa fictícia que gerencia
     senha: 1234
 ```
 
+
+#### [link redoc (localhost)](http://127.0.0.1:8000/redoc/)
+
+#### [link swqgger (localhost)](http://127.0.0.1:8000/swagger/)
+
+
 ## Intruções
 
 
