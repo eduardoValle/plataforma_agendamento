@@ -79,9 +79,9 @@ def appointments_id(request, id):
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 def appointments_confirm(request, token):
-    if request.method == 'POST':
+    if request.method == 'GET':
         try:
             appointment = Appointment.objects.get(token=token)
 
