@@ -13,6 +13,11 @@ from register.serializers import CustomUserSerializer
 
 @api_view(['POST'])
 def register(request):
+
+    """
+    Insere um novo objeto do tipo CustomUser na base de dados.
+    """
+
     # INSERINDO NOVO OBJETO
     if request.method == 'POST':
         request.data['is_staff'] = False

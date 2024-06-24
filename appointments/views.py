@@ -14,12 +14,20 @@ from appointments.tasks import send_appointment_confirmation_email_task, execute
 @api_view(['GET', 'POST', 'PUT'])
 @permission_classes([IsAuthenticated])
 def appointments(request):
+    """
+    Retorna uma lista todos os Appointments registrados. [Precisa estar auntenticado!]
+    """
+
     # RETORNANDO LISTA DE OBJETOS
     if request.method == 'GET':
         Appointment.objects.all()
         serializer = AppointmentSerializer(Appointment.objects.all(), many=True)
         return Response(serializer.data)
 
+
+    """
+    Insere um novo objeto do tipo Appointment na base de dados. [Precisa estar auntenticado!]
+    """
     # INSERINDO NOVO OBJETO
     if request.method == 'POST':
         request.data['status'] = 'pending'
@@ -33,6 +41,9 @@ def appointments(request):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    """
+    Atualiza um objeto existente do tipo Appointment na base dedados. [Precisa estar auntenticado!]
+    """
     # ATUALIZANDO OBJETO
     if request.method == 'PUT':
         try:
@@ -54,6 +65,13 @@ def appointments(request):
 @api_view(['GET', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def appointments_id(request, id):
+
+    """
+    Retorna um objeto existente do tipo Appointment que tem o id igual ao informado. [Precisa estar auntenticado!]
+
+    :param id: Atributo id referente ao objeto Appointment.
+    :return: objeto do tipo Appointment
+    """
     if request.method == 'GET':
         try:
             appointment = Appointment.objects.get(pk=id)
@@ -63,6 +81,9 @@ def appointments_id(request, id):
         except Appointment.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+    """
+    Remove um objeto existente do tipo Appointment que tem o id igual ao informado. [Precisa estar auntenticado!]
+    """
     if request.method == 'DELETE':
         try:
             appointment = Appointment.objects.get(pk=id)
