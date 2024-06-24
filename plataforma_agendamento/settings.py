@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 
 APP_NAME = 'Plataforma de Agendamentos'
+APP_DESCRIPTION = 'Desafio de criar uma aplicação backend para uma empresa fictícia que gerencia uma plataforma de agendamento de serviços'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,11 +45,8 @@ INSTALLED_APPS = [
     'django_rest_passwordreset',
     'drf_yasg',
     'api.apps.ApiConfig',
-    'authentication.apps.AuthenticationConfig',
     'appointments.apps.AppointmentsConfig',
-    'send_email.apps.SendEmailConfig',
     'register.apps.RegisterConfig',
-    'pages.apps.PagesConfig',
 ]
 
 MIDDLEWARE = [
