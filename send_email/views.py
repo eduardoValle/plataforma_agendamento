@@ -7,7 +7,9 @@ from rest_framework.response import Response
 
 
 def send_email(request):
-    slow_task.delay()
+    send_mail('Titulo', '*****************  Mensagem ********************',
+              'luizeduardovalle@gmail.com', ['luizeduardovalle@gmail.com'])
+    # slow_task.delay()
     return HttpResponse('email enviado!')
 
 

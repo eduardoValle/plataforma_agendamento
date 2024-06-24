@@ -121,7 +121,6 @@ SWAGGER_SETTINGS = {
     }
 }
 
-
 # from kombu import Exchange, Queue
 # task_default_queue = 'default'
 # default_exchange = Exchange('media', type='direct')
@@ -159,16 +158,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # else:
 #     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_SMTP = 'live.smtp.mailtrap.io'
-EMAIL_HOST = 'live.smtp.mailtrap.io'
-EMAIL_HOST_USER = 'api'
-EMAIL_HOST_PASSWORD = 'd0dd6ab7e64fe7bfcc3af0580d715555'
-EMAIL_PORT = '587'
+DEFAUT_FROM_EMAIL = EMAIL_BACKEND
+EMAIL_SMTP = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'djangoagendamento@gmail.com'
+EMAIL_HOST_PASSWORD = 'rupcrpkpdnadvubp'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
-
-#CELERY
+# CELERY
 
 BROKER_URL = 'amqp://guest:guest@localhost:5672//'
 
@@ -182,4 +182,3 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_ENABLED = True
 # CELERY_TASK_QUEUES = task_queues
-

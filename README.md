@@ -13,6 +13,12 @@ Plataforma de agendamento de serviços
 
 
 
+### Subir container do RabbitMQ
+
+`docker run -d -p 5672:5672 rabbitmq`
+
+
+
 -----
 ### Rodar as migrations
 
