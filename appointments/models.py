@@ -12,4 +12,4 @@ class Appointment(models.Model):
     REQUIRED_FIELDS = [user, date, service]
 
     def __str__(self):
-        return f'Serviço: {self.service} | Status: {self.status}'
+        return f'id: {self.id} | Serviço: {self.service} | Status: {self.status}'
