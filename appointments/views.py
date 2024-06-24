@@ -19,6 +19,7 @@ def appointments(request):
 
     # INSERINDO NOVO OBJETO
     if request.method == 'POST':
+        request.data['status'] = 'pending'
         serializer = AppointmentSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
