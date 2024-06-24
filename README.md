@@ -17,14 +17,14 @@ Desafio de criar uma aplicação backend para uma empresa fictícia que gerencia
 
 Os comandos abaixo devem ser executados em um terminal mapeado na pasta raiz do projeto.
 
-### 1 - Abra um `terminal` e ative um ambiente virtual `venv`:
+#### 1 - Abra um `terminal` e ative um ambiente virtual `venv`:
 
 ```
 .\venv\Scripts\activate
 ```
 
 
-### 2 - Instalar as dependências do projeto do ambiente `venv`:
+#### 2 - Instalar as dependências do projeto do ambiente `venv`:
 
 ```
 poetry install
@@ -32,7 +32,7 @@ poetry install
 
 
 
-### 3 - Certifique-se que está no ambiente `venv` e inicie o projeto:
+#### 3 - Certifique-se que está no ambiente `venv` e inicie o projeto:
 
 ```
 poetry run manage.py runserver
@@ -40,14 +40,14 @@ poetry run manage.py runserver
 
 
 
-### 4 - Abra um segundo terminal, certifique-se que este também está no ambiente `venv` e inicie o `Celery`:
+#### 4 - Abra um segundo terminal, certifique-se que este também está no ambiente `venv` e inicie o `Celery`:
 
 ```
 celery -A plataforma_agendamento worker -l info -P solo
 ```
 
 
-### 5 - Por fim, subir container do `RabbitMQ`:
+#### 5 - Por fim, subir container do `RabbitMQ`:
 
 ```
 docker run -d -p 5672:5672 rabbitmq
@@ -57,30 +57,30 @@ docker run -d -p 5672:5672 rabbitmq
 ## Removendo o banco de dados atual
 
 
-### 1 - Remova o arquivo `db.sqlite3` da pasta raiz do projeto
+#### 1 - Remova o arquivo `db.sqlite3` da pasta raiz do projeto
 
 
-### 2 - Abra um `terminal` e ative um ambiente virtual `venv`:
+#### 2 - Abra um `terminal` e ative um ambiente virtual `venv`:
 
 ```
 .\venv\Scripts\activate
 ```
 
-### 3 - Execute o comando abaixo para que o python gere as migrations necessárias:
+#### 3 - Execute o comando abaixo para que o python gere as migrations necessárias:
 
 ```
 poetry run manage.py makemigrations
 ```
 
 
-### 4 - Execute o comando abaixo para que o python gere o banco e as tabelas do projeto:
+#### 4 - Execute o comando abaixo para que o python gere o banco e as tabelas do projeto:
 
 ```
 poetry run manage.py migrate
 ```
 
 
-### 5 - Crie um novo usuário `super-admin` para ter acesso à parte administrativa do proejto:
+#### 5 - Crie um novo usuário `super-admin` para ter acesso à parte administrativa do proejto:
 
 ```
 poetry run manage.py createsuperuser
