@@ -80,6 +80,10 @@ def appointments_id(request, id):
 
 @api_view(['GET'])
 def appointments_confirm(request, token):
+    """
+    Altera o status de um Appointment de 'Pending' pora 'Confirmed'. Em seguida o coloca na fila de processamentod o Celery.
+    """
+
     if request.method == 'GET':
         try:
             appointment = Appointment.objects.get(token=token)
