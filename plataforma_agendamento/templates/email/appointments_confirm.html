@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Recuperar senha</title>
+</head>
+<body>
+    <h1>Olá {{ email }}</h1>
+
+    <p>Verificamos que agendou o serviço <b>'{{ appointments_service }}'</b> em nossa {{ app_name }}!</p>
+
+    <p>Seu serviço ainda continua pendente em nossa plataforma e precisa de sua confirmação para ser executado.</p>
+
+    <p>Clique no link a seguir para confirmar seu agendamento <a href="{{ link }}" target="_blank">confirmar agendamento!</a></p>
+</body>
+</html>

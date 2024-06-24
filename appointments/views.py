@@ -1,3 +1,7 @@
+import uuid
+
+from django.urls import reverse
+from django.utils import timezone
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -20,13 +24,12 @@ def appointments(request):
     # INSERINDO NOVO OBJETO
     if request.method == 'POST':
         request.data['status'] = 'pending'
+        request.data['token'] = uuid.uuid1().hex
         serializer = AppointmentSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            send_appointment_confirmation_email_task.delay(['djangoagendamento@gmail.com'],
-                                                           'Enviando e-mail de confirmação de agendamento!',
-                                                           'serializer.data')
-
+            url = request.build_absolute_uri(reverse('appointments'))
+            send_appointment_confirmation_email_task.delay(url, serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -72,5 +75,26 @@ def appointments_id(request, id):
 
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+@api_view(['POST'])
+def appointments_confirm(request, token):
+    if request.method == 'POST':
+        try:
+            appointment = Appointment.objects.get(token=token)
+
+            # if timezone.now < appointment.date:
+            #     return Response('Não foi possível confirmar o serviço, pois sua data já passou!')
+
+            # request['status'] = 'Confirmed'
+            appointment.status = 'Confirmed'
+            appointment.save()
+            serializer = AppointmentSerializer(appointment)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        except Appointment.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)

@@ -7,6 +7,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from plataforma_agendamento.settings import EMAIL_HOST_USER, APP_NAME
 from register.serializers import CustomUserSerializer
 
 
@@ -44,7 +45,7 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
         'email': reset_password_token.user.email,
         'reset_password_token': reset_password_token,
         'reset_password_url': "{}?token={}".format(
-            instance.request.build_absolute_uri(reverse('password_reset:reset-password-confirm')),
+            instance.request.build_absolute_uri(reverse('password-reset:reset-password-confirm')),
             reset_password_token.key)
     }
 
@@ -54,11 +55,11 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
 
     msg = EmailMultiAlternatives(
         # title:
-        "Password Reset for {title}".format(title="Some website title"),
+        "Recuperação de senha para a {title}".format(title=APP_NAME),
         # message:
         email_plaintext_message,
         # from:
-        "noreply@somehost.local",
+        EMAIL_HOST_USER,
         # to:
         [reset_password_token.user.email]
     )
