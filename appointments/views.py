@@ -1,12 +1,15 @@
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from appointments.models import Appointment
 from appointments.serializers import AppointmentSerializer
+from appointments.tasks import send_appointment_confirmation_email_task
 
 
 @api_view(['GET', 'POST', 'PUT'])
+@permission_classes([IsAuthenticated])
 def appointments(request):
     # RETORNANDO LISTA DE OBJETOS
     if request.method == 'GET':
@@ -19,6 +22,10 @@ def appointments(request):
         serializer = AppointmentSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            send_appointment_confirmation_email_task.delay(['djangoagendamento@gmail.com'],
+                                                           'Enviando e-mail de confirmação de agendamento!',
+                                                           'serializer.data')
+
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -42,6 +49,7 @@ def appointments(request):
 
 
 @api_view(['GET', 'DELETE'])
+@permission_classes([IsAuthenticated])
 def appointments_id(request, id):
     if request.method == 'GET':
         try:
