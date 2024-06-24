@@ -218,6 +218,17 @@ celery = ">=5.2.7,<6.0"
 Django = ">=3.2.18"
 
 [[package]]
+name = "django-rest-passwordreset"
+version = "1.4.1"
+description = "An extension of django rest framework, providing a configurable password reset strategy"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-rest-passwordreset-1.4.1.tar.gz", hash = "sha256:94ea2aa717d2a6c50898541a1177dca4ae8b74bb67460aae3fd6ae02c992ce52"},
+    {file = "django_rest_passwordreset-1.4.1-py3-none-any.whl", hash = "sha256:701f26804b6317f8ddbb1f9b2159176b65d8281e980b90db32dbd60407fb518a"},
+]
+
+[[package]]
 name = "djangorestframework"
 version = "3.15.2"
 description = "Web APIs for Django, made easy."
@@ -548,4 +559,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "85bc76b057afe2d7b2bbeebebed1eed7292d6ba72f90365728f092b54759462c"
+content-hash = "607f6b7ebd14829ab333254eebe86634ca9d9b87e33cede9b96d0b7e0a2d9cbd"

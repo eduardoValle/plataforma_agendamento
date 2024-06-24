@@ -11,6 +11,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
+    username = models.CharField(max_length=100, default='')
     full_name = models.CharField(max_length=100)
     phone = models.CharField(max_length=100)
 

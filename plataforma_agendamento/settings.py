@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django_celery_results',
     'rest_framework',
     'rest_framework_simplejwt',
-    # 'rest_framework.authtoken',
+    'django_rest_passwordreset',
     'drf_yasg',
     'api.apps.ApiConfig',
     'authentication.apps.AuthenticationConfig',
