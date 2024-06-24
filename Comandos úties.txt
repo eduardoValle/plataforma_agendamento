@@ -1,0 +1,91 @@
+# plataforma_agendamento
+
+Desafio de criar uma aplicação backend para uma empresa fictícia que gerencia uma plataforma de agendamento de serviços.
+
+
+## Intruções
+
+
+### 1 Ativar ambiente virtual utilizando um terminal
+
+```
+.\venv\Scripts\activate
+```
+
+
+### 2 Instalar as dependências do projeto do ambiente venv
+
+```
+poetry install
+```
+
+
+### 3 Certifique-se que está no ambiente venv e inicie o projeto
+
+```
+poetry run manage.py runserver
+```
+
+
+### 4 Abra um segundo terminal, certifique-se que este também está no ambiente venv e inicie o Celery
+
+```
+celery -A plataforma_agendamento worker -l info -P solo
+```
+
+
+### 5- Por fim, subir container do RabbitMQ
+
+`docker run -d -p 5672:5672 rabbitmq`
+
+
+-----
+### Criar as migrations
+
+`py manage.py makemigrations`
+
+
+-----
+### Rodar as migrations
+
+`py manage.py migrate`
+
+
+
+### Rodar o projeto
+
+`py manage.py runserver`
+
+
+
+### Criar 'Super user' para a área ADM
+
+`py manage.py createsuperuser`
+
+
+
+### Criar novo módulo
+
+`py manage.py startapp login`
+
+
+
+-----
+
+# Poetry
+
+### Crie um básico pyproject.tomlcom djangocomo dependência:
+
+`poetry init --no-interaction --dependency django`
+
+
+
+### Crie venv com todas as dependências necessárias:
+
+`poetry install`
+
+
+
+### Inicie seu projeto de demonstração:
+
+`poetry run django-admin startproject plataforma-agendamento`

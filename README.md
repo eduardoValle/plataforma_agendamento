@@ -1,65 +1,87 @@
-# plataforma_agendamento
-Plataforma de agendamento de serviços
+# Plataforma de Agendamento
+
+Desafio de criar uma aplicação backend para uma empresa fictícia que gerencia uma plataforma de agendamento de serviços.
 
 
-### Ativar ambiente virtual
+## Dados importantes
+```
+-> O projeto já possúi um banco de dados sqlite integrado, portanto não precisa se preocupar em configuar um!
+-> Esse projeto já está configurado com um smtp e uma conta e-mail, por isso não se preocupe em com essa parte!
+-> já existe cadastrado na base um usuário 'super-admin' registrado e os dados de acesso são:
+    usuário: teste@teste.com
+    senha: 1234
+```
 
-`.\venv\Scripts\activate`
-
-
-### Subir serviço do Celey
-
-`celery -A plataforma_agendamento worker -l info -P solo`
-
-
-
-### Subir container do RabbitMQ
-
-`docker run -d -p 5672:5672 rabbitmq`
+## Intruções
 
 
+Os comandos abaixo devem ser executados em um terminal mapeado na pasta raiz do projeto.
 
------
-### Rodar as migrations
+### 1 - Abra um terminal e ative um ambiente virtual VENV:
 
-`py manage.py migrate`
-
-
-
-### Rodar o projeto
-
-`py manage.py runserver`
+```
+.\venv\Scripts\activate
+```
 
 
+### 2 - Instalar as dependências do projeto do ambiente venv:
 
-### Criar 'Super user' para a área ADM
-
-`py manage.py createsuperuser`
+```
+poetry install
+```
 
 
 
-### Criar novo módulo
+### 3 - Certifique-se que está no ambiente venv e inicie o projeto:
 
-`py manage.py startapp login`
-
-
-
------
-
-# Poetry
-
-### Crie um básico pyproject.tomlcom djangocomo dependência:
-
-`poetry init --no-interaction --dependency django`
+```
+poetry run manage.py runserver
+```
 
 
 
-### Crie venv com todas as dependências necessárias:
+### 4 - Abra um segundo terminal, certifique-se que este também está no ambiente venv e inicie o Celery:
 
-`poetry install`
+```
+celery -A plataforma_agendamento worker -l info -P solo
+```
 
 
+### 5 - Por fim, subir container do RabbitMQ:
 
-### Inicie seu projeto de demonstração:
+```
+docker run -d -p 5672:5672 rabbitmq
+```
 
-`poetry run django-admin startproject plataforma-agendamento`
+
+## Removendo o banco de dados atual
+
+
+### 1 - Remova o arquivo 'db.sqlite3' da pasta raiz do projeto
+
+
+### 2 - Abra um terminal e ative um ambiente virtual VENV:
+
+```
+.\venv\Scripts\activate
+```
+
+### 3 - Execute o comando abaixo para que o python gere as migrations necessárias:
+
+```
+poetry run manage.py makemigrations
+```
+
+
+### 4 - Execute o comando abaixo para que o python gere o banco e as tabelas do projeto:
+
+```
+poetry run manage.py migrate
+```
+
+
+### 5 - Crie um novo usuário 'super-admin' para ter acesso à parte administrativa do proejto:
+
+```
+poetry run manage.py createsuperuser
+```
