@@ -3,6 +3,7 @@ from django.dispatch import receiver
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django_rest_passwordreset.signals import reset_password_token_created
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -11,6 +12,7 @@ from plataforma_agendamento.settings import EMAIL_HOST_USER, APP_NAME
 from register.serializers import CustomUserSerializer
 
 
+@swagger_auto_schema(methods=['post'], request_body=CustomUserSerializer)
 @api_view(['POST'])
 def register(request):
 

@@ -1,6 +1,8 @@
 import uuid
 
 from django.urls import reverse
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -10,7 +12,14 @@ from appointments.models import Appointment
 from appointments.serializers import AppointmentSerializer
 from appointments.tasks import send_appointment_confirmation_email_task, execute_appointments_service
 
+token_param = openapi.Parameter('token', openapi.IN_QUERY, description="Token no formato srting referente ao Appointment.", type=openapi.TYPE_STRING)
+number_param = openapi.Parameter('id', openapi.IN_QUERY, description="Id referente ao objeto Appointment.", type=openapi.TYPE_NUMBER)
+appointment_response = openapi.Response('response description', AppointmentSerializer)
+all_appointments = openapi.Response('response description', AppointmentSerializer(many=True))
 
+
+@swagger_auto_schema(method='get', responses={200: all_appointments, 400: None})
+@swagger_auto_schema(methods=['put', 'post'], request_body=AppointmentSerializer)
 @api_view(['GET', 'POST', 'PUT'])
 @permission_classes([IsAuthenticated])
 def appointments(request):
@@ -23,7 +32,6 @@ def appointments(request):
         Appointment.objects.all()
         serializer = AppointmentSerializer(Appointment.objects.all(), many=True)
         return Response(serializer.data)
-
 
     """
     Insere um novo objeto do tipo Appointment na base de dados. [Precisa estar auntenticado!]
@@ -62,15 +70,13 @@ def appointments(request):
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
+@swagger_auto_schema(method='get', manual_parameters=[number_param], responses={200: appointment_response, 404: None})
+@swagger_auto_schema(methods=['delete'], manual_parameters=[number_param], responses={204: None, 404: None})
 @api_view(['GET', 'DELETE'])
 @permission_classes([IsAuthenticated])
 def appointments_id(request, id):
-
     """
     Retorna um objeto existente do tipo Appointment que tem o id igual ao informado. [Precisa estar auntenticado!]
-
-    :param id: Atributo id referente ao objeto Appointment.
-    :return: objeto do tipo Appointment
     """
     if request.method == 'GET':
         try:
@@ -99,6 +105,7 @@ def appointments_id(request, id):
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
+@swagger_auto_schema(method='get', manual_parameters=[token_param], responses={200: appointment_response, 404: None})
 @api_view(['GET'])
 def appointments_confirm(request, token):
     """
