@@ -23,7 +23,7 @@ Desafio de criar uma aplicação backend para uma empresa fictícia que gerencia
 
 Os comandos abaixo devem ser executados em um terminal mapeado na pasta raiz do projeto.
 
-#### 1 - Abra um `terminal` e ative um ambiente virtual `venv`:
+#### 1 - Abra um `terminal`, navegue até a raiz do projeto e ative o ambiente virtual `venv`:
 
 ```
 .\venv\Scripts\activate
