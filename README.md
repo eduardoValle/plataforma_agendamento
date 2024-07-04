@@ -15,7 +15,7 @@ Desafio de criar uma aplicação backend para uma empresa fictícia que gerencia
 
 #### [link redoc (localhost)](http://127.0.0.1:8000/redoc/)
 
-#### [link swqgger (localhost)](http://127.0.0.1:8000/swagger/)
+#### [link swagger (localhost)](http://127.0.0.1:8000/swagger/)
 
 
 ## Intruções
