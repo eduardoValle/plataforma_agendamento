@@ -66,7 +66,7 @@ docker run -d -p 5672:5672 rabbitmq
 #### 1 - Remova o arquivo `db.sqlite3` da pasta raiz do projeto
 
 
-#### 2 - Abra um `terminal` e ative um ambiente virtual `venv`:
+#### 2 - Abra um `terminal`, navegue até a raiz do projeto e ative o ambiente virtual `venv`:
 
 ```
 .\venv\Scripts\activate
